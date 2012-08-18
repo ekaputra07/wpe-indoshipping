@@ -2,8 +2,8 @@
 Contributors: ekaputra07
 Tags: wp e-commerce, shipping plugin, Indonesian Shipping plugin, JNE shipping, TIKI shipping
 Requires at least: 2.8
-Tested up to: 3.1.4
-Stable tag: 1.3.1
+Tested up to: 3.4.1
+Stable tag: 1.4.0
 
 Plugin shipping Indonesia yang khusus untuk diintegrasikan dengan plugin WP-Ecommerce.
 
@@ -36,22 +36,20 @@ Proses instalasi sangatlah mudah, sama dengan melakukkan instalasi plugin WordPr
 
 4. Jangan lupa untuk mengganti nama Shipping sesuai dengan Jasa pengiriman yang anda pakai.
 
-**PERHATIAN :
-Plugin ini hanya akan berfungsi dengan baik apabila modul shipping ini diaktifkan sendiri. Modul shipping lain harap jangan diaktifkan.**
-
 == Frequently Asked Questions ==
 
 = Sudah saya install, knapa ga muncul di halaman checkout? =
 Pastikan Enable shipping sudah dicentang di halaman setting wp e-commerce.
 
-= Sudah mau muncul di halaman checkout, knapa formnya juga muncul di modul shipping lain? =
-Seperti yang sudah dijelaskan pada bagian instalasi diatas, diharapkan sekali modul shipping yang aktif hanyalah satu, yaitu WPE indoshipping ini.
-Karena wp e-commerce memiliki cara khusus untuk menampilkan ongkos kirim, sedangkan untuk memanipulasi tampilan ongkos kirim per daerah/propinsi maka satu-satunya cara adalah dengan memanipulasi DOM dengan memasukkan form dengan Javascript.
-
 = Apakah plugin ini bisa jalan apa Javascript di browser saya dimatikan/disable? =
 Maaf, plugin ini mutlak memerlukan javascript.
 
 == Changelog ==
+
+= 1.4.0 =
+* Sudah bisa dipergunakan bersamaan dengan metode shipping lain
+* Style bawaan plugin dihilangkan.
+* Daftar Provinsi dan Kota sekarang sudah ditampilkan secara berurutan berdasarkan nama.
 
 = 1.3.1 =
 * Bug fixed - Nilai shipping tidak otomatis saat kota muncul
