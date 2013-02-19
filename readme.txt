@@ -2,8 +2,8 @@
 Contributors: ekaputra07
 Tags: wp e-commerce, shipping plugin, Indonesian Shipping plugin, JNE shipping, TIKI shipping
 Requires at least: 2.8
-Tested up to: 3.4.1
-Stable tag: 1.4.0
+Tested up to: 3.5.1
+Stable tag: 2.0.0
 
 Plugin shipping Indonesia yang khusus untuk diintegrasikan dengan plugin WP-Ecommerce.
 
@@ -12,11 +12,6 @@ Plugin shipping Indonesia yang khusus untuk diintegrasikan dengan plugin WP-Ecom
 Dengan **WPE Indoshipping** maka anda dapat menampilkan daftar ongkos kirim per daerah di Indonesia yang anda pilih.
 
 Cocok digunakan untuk menampilkan daftar ongkos kirim dari JNE, TIKI atau yang lainnya dan secara langsung akan berpengaruh pada nilai order anda.
-
-Database harga hanya menggunakan file PHP untuk menyimpan daftar harga dan daerahnya, pengeditan harga dan nama daerah harus dilakukkan secara manual melalui plugin editor
-atau menggunakan FTP.
-
-**[Tersedia versi PRO - more features, more powerful](http://balitechy.com/wp-plugins/wpe-indoshipping-pro/)**
 
 **[Laporkan Bug dan support](http://balitechy.com/wp-plugins/wp-ecommerce-indoshipping/)**
 
@@ -45,6 +40,11 @@ Pastikan Enable shipping sudah dicentang di halaman setting wp e-commerce.
 Maaf, plugin ini mutlak memerlukan javascript.
 
 == Changelog ==
+
+== 2.0.0 ==
+* Data shipping tersimpan di database
+* Terdapat DB importer untuk mengimport data shipping dari plugin sebelumnya
+* Support multi shipping, bisa dipadukan dengan plugin shipping lainnya
 
 = 1.4.0 =
 * Sudah bisa dipergunakan bersamaan dengan metode shipping lain
@@ -75,6 +75,10 @@ Maaf, plugin ini mutlak memerlukan javascript.
 * Database harga dan daerah berupa file PHP.
 
 == Upgrade Notice ==
+
+== 2.0.0 ==
+Sebelum melakukkan update, ambil file daerah.db.php dari plugin sebelum nya, karena akan diperlukan untuk diimport ke plugin
+versi ini. Ini artinya anda tidak perlu mengulang lagi memasukkan data shipping, tinggal import saja.
 
 = 1.2.1 =
 Segera upgrade ke versi ini, bug pada versi 1.2.0 sudah diperbaiki.
