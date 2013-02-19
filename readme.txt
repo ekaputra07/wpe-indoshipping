@@ -15,6 +15,8 @@ Cocok digunakan untuk menampilkan daftar ongkos kirim dari JNE, TIKI atau yang l
 
 **[Laporkan Bug dan support](http://balitechy.com/wp-plugins/wp-ecommerce-indoshipping/)**
 
+**[Ingin kembangkan lebih lanjut?](https://github.com/ekaputra07/wpe-indoshipping)**
+
 == Installation ==
 
 Proses instalasi sangatlah mudah, sama dengan melakukkan instalasi plugin WordPress lainnya.
