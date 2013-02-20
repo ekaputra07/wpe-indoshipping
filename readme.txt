@@ -9,7 +9,7 @@ Plugin shipping Indonesia yang khusus untuk diintegrasikan dengan plugin WP-Ecom
 
 == Description ==
 
-**Terakhir di test pada WP-Ecommerce versi 3.8.9.9**
+**Terakhir di test pada WP-Ecommerce versi 3.8.9.5**
 
 Dengan **WPE Indoshipping** maka anda dapat menampilkan daftar ongkos kirim per daerah di Indonesia yang anda pilih.
 
