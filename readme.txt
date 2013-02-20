@@ -45,7 +45,7 @@ Maaf, plugin ini mutlak memerlukan javascript.
 
 == Changelog ==
 
-== 2.0.0 ==
+= 2.0.0 =
 * Data shipping tersimpan di database
 * Terdapat DB importer untuk mengimport data shipping dari plugin sebelumnya
 * Support multi shipping, bisa dipadukan dengan plugin shipping lainnya
@@ -80,7 +80,7 @@ Maaf, plugin ini mutlak memerlukan javascript.
 
 == Upgrade Notice ==
 
-== 2.0.0 ==
+= 2.0.0 =
 Sebelum melakukkan update, ambil file daerah.db.php dari plugin sebelum nya, karena akan diperlukan untuk diimport ke plugin
 versi ini. Ini artinya anda tidak perlu mengulang lagi memasukkan data shipping, tinggal import saja.
 
