@@ -198,6 +198,51 @@ function wpei_is_valid_dbfile(){
         }
 }
 
+
+class CSVImprter{
+
+    private $filename;
+    private $logs = array();
+
+    function __construct($filename){
+        $this->filename = $filename;
+    }
+    
+    public function import_now(){
+        $row = 0;
+        if (($handle = fopen($this->filename, "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                $row++;
+                $num = count($data);
+                if(!$data[0] && !$data[1] && !$data[2]){
+                    //Its empty line, do nothing
+                    $this->logs[] = "[$row] : kosong...";
+                }else{
+                    if($data[0] && $data[1] && $data[2]){
+                        //This is head section of profince
+                        $this->logs[] = "[$row] : imported '$data[1]'";
+                    }else if(!$data[0] && $data[1] && $data[2]){
+                        //This is head section of profince
+                        $this->logs[] = "[$row] : imported '$data[1]'";
+                    }else{
+                        $this->logs[] = "[$row] : not imported...";
+                    }
+                }
+            }
+            fclose($handle);
+        } 
+    }
+    
+    public function print_logs(){
+        print_r($this->logs);
+    }
+}
+
+function csv_import(){
+    $importer = new CSVImprter("test.csv");
+    $importer->import_now();
+}
+
 /*
  * Handle Ajax Reqest
  */
