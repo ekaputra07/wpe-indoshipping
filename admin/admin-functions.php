@@ -201,29 +201,75 @@ function wpei_is_valid_dbfile(){
 
 class CSVImprter{
 
-    private $filename;
-    private $logs = array();
-
+    public $filename;
+    public $logs = array();
+    
     function __construct($filename){
         $this->filename = $filename;
     }
     
     public function import_now(){
+        global $app_db_province, $app_db_city;
+        global $wpdb;
+        
         $row = 0;
+        $province = 0;
+        
         if (($handle = fopen($this->filename, "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 $row++;
-                $num = count($data);
                 if(!$data[0] && !$data[1] && !$data[2]){
                     //Its empty line, do nothing
-                    $this->logs[] = "[$row] : kosong...";
+                    $this->logs[] = "[$row] Baris kosong...";
                 }else{
+                                    
                     if($data[0] && $data[1] && $data[2]){
                         //This is head section of profince
-                        $this->logs[] = "[$row] : imported '$data[1]'";
+                        $province_name = $data[0];
+                        $city = $data[1];
+                        $price = $data[2];
+                        
+                        $prov = array('province_name'=>$province_name);
+                        
+                        if($wpdb->insert($app_db_province, $prov)){
+                            $province = $wpdb->insert_id;
+                            $this->logs[] = "[$row] : === Prov. '$province_name' ===";
+                        }else{
+                            $this->logs[] = "[$row] : === Prov. '$province_name' (not imported, Duplicate) ===";
+                        }
+                        
+
+                            
+                        $kota = array(
+                        'city_name'=>$city,
+                        'shipping_rate'=>$price,
+                        'province_id'=>$province
+                        );
+                        
+                        if($wpdb->insert($app_db_city, $kota)){
+                            $this->logs[] = "[$row] : imported '$city'";
+                        }else{
+                            $this->logs[] = "[$row] : not imported...";
+                        }
+    
+                        
                     }else if(!$data[0] && $data[1] && $data[2]){
-                        //This is head section of profince
-                        $this->logs[] = "[$row] : imported '$data[1]'";
+                    
+                        $city = $data[1];
+                        $price = $data[2];
+                        
+                        $kota = array(
+                        'city_name'=>$city,
+                        'shipping_rate'=>$price,
+                        'province_id'=>$province
+                        );
+                        
+                        if($wpdb->insert($app_db_city, $kota)){
+                            $this->logs[] = "[$row] : imported '$city'";
+                        }else{
+                            $this->logs[] = "[$row] : not imported...";
+                        }
+                        
                     }else{
                         $this->logs[] = "[$row] : not imported...";
                     }
@@ -232,15 +278,22 @@ class CSVImprter{
             fclose($handle);
         } 
     }
-    
-    public function print_logs(){
-        print_r($this->logs);
-    }
 }
 
-function csv_import(){
-    $importer = new CSVImprter("test.csv");
-    $importer->import_now();
+function wpei_csv_import(){
+    global $app_prefix, $app_base_path, $app_base_url;
+
+    $dbfile = $_POST['dbfile'];
+    $csv_path = $app_base_path.'upload/'.$dbfile;
+    
+    if(file_exists($csv_path)){
+        $importer = new CSVImprter($csv_path);
+        $importer->import_now();
+        $stat = implode('<br/>', $importer->logs);
+        die($stat);
+    }else{
+        die ('Import gagal!, '.$dbfile.' tidak valid CSV.');
+    }
 }
 
 /*
@@ -253,5 +306,5 @@ add_action('wp_ajax_ADDCITY','wpei_ajax_add_city');
 add_action('wp_ajax_DELALL','wpei_delete_all');
 add_action('wp_ajax_DELCITY','wpei_ajax_del_city');
 add_action('wp_ajax_UPDTCITY','wpei_ajax_updt_city');
-add_action('wp_ajax_DBIMPORT','wpei_is_valid_dbfile');
+add_action('wp_ajax_DBIMPORT','wpei_csv_import');
 ?>

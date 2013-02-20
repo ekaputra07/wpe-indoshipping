@@ -34,43 +34,46 @@ if(!is_writable($upload_path)){
 			name: 'uploadfile',
 			data:({upload_path:'<?=$upload_path?>'}),
 			onSubmit: function(file, ext){
-				 if (! (ext && /^(php)$/.test(ext))){
+				 if (! (ext && /^(csv)$/.test(ext))){
                     // extension is not allowed
-					status.text('Only PHP file are allowed');
+					status.text('Error: Hanya file CSV yang diijinkan!');
 					return false;
 				}
-				status.text('Uploading, please wait...');
+				status.text('Mengupload, silahkan tunggu...');
 			},
-			onComplete: function(file, response){
+			onComplete: function(file, resp){
+                $('#import_file').val(file);
+                status.text('');
+                /*
 				//On completion clear the status
 				status.text('');
 				//Add uploaded file to list
 				if(response.length < 25 && response != 'error'){
 				    $('#import_file').val(file);
-					status.text('Upload success!');
+					status.text('Upload berhasil!');
 				} else{
 					status.text('Upload error!');
-				}
+				}*/
 			}
 		});
 
     $('#btn-import').click(function(){
         var dbfile = $('#import_file').val();
         if(dbfile != ''){
-        $('.import-status').text('Start importing...');
+        $('.import-status').text('mengimport...');
         $.ajax({
             type : 'post',
-            url : indoshipping_pro_vars.ajaxurl,
+            url : indoshipping_vars.ajaxurl,
             data :({action:'DBIMPORT','dbfile':dbfile}),
             success : function(respond){
-            $('.import-status').text(respond);
+            $('.import-status').html(respond);
             },
             error : function(){
-                $('.import-status').text('Import failed!.');
+                $('.import-status').text('Import gagal!.');
             }
         });
         }else{
-        alert('Upload file daerah.db.php terlebih dahulu!');
+        alert('Upload file CSV terlebih dahulu!');
         }
     });
 
@@ -78,7 +81,8 @@ if(!is_writable($upload_path)){
 </script>
 <!-- END JS FOR AJAX UPLOADER-->
 <p><input type="text" name="import_file" id="import_file" value="" readonly="readonly"> <input type="button" value="Upload" id="btn-upload" class="button-secondary"/> <span class="upload-status"></span></p>
-<p><input type="button" value="Import sekarang" id="btn-import" class="button-primary"/> <span class="import-status"></span></p>
+<p><input type="button" value="Import sekarang" id="btn-import" class="button-primary"/><br/><br/>
+<span class="import-status"></span></p>
 <!-- End module content Admin -->
 </div>
 </div></div></div>
