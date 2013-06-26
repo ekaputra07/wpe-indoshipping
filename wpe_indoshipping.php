@@ -12,7 +12,7 @@
 */
 
 /* Include Plugin config */
-include 'config.php';
+include 'settings.php';
 
 /* Plugin DB install */
 function wpei_install_db(){
@@ -51,11 +51,16 @@ register_activation_hook(__FILE__,'wpei_install_db');
 include $app_base_path.'admin/admin.php';
 
 /* Register plugin's Style and Scripts */
-if(! is_admin()){
-    wp_enqueue_style('indoshipping_css',$app_base_url.'assets/indoshipping.css');
-    wp_enqueue_script('indoshipping_js',$app_base_url.'assets/indoshipping.js',array('jquery'));
-    wp_localize_script('indoshipping_js','indoshipping',array('pluginurl'=>$app_base_url,'ajaxurl'=>admin_url('admin-ajax.php')));
+function indosEnqueue() {
+	if(! is_admin()){
+	    wp_register_style('indoshipping_css',$app_base_url.'assets/indoshipping.css');
+	    wp_register_script('indoshipping_js',$app_base_url.'assets/indoshipping.js',array('jquery'));
+	    wp_localize_script('indoshipping_js','indoshipping',array('pluginurl'=>$app_base_url,'ajaxurl'=>admin_url('admin-ajax.php')));
+	    wp_enqueue_style('indoshipping_css');
+	    wp_enqueue_script('indoshipping_js');
+	}
 }
+add_action('wp_enqueue_scripts', 'indosEnqueue');
 
 /* Load Province */
 function wpei_load_province_html(){
@@ -150,7 +155,7 @@ class wpe_indoshipping {
 
 		$wpei_shippingname = get_option('wpe_shippingname_neo');
 
-		$output .= '<tr>';
+		$output = '<tr>';
 		$output .= '<td>';
 		$output .= '<p style="color:red;"><strong>WARNING</strong>: Selalu ingat men-set berat produk anda. Apabila satu saja berat produk anda di Cart = 0, maka hasil perhitungan ongkir menjadi 0. Secara default ongkir akan dihitung 1 Kg.</p>';
 		$output .= '<p><strong>Apabila hal diatas terjadi, developer/plugin tidak bertanggung jawab atas kesalahan/kerugian yang terjadi karena ongkir yang tidak akurat.</strong></p>';
@@ -180,6 +185,8 @@ class wpe_indoshipping {
 	}
 
 	function getQuote() {
+		
+		$_SESSION['wpsc_delivery_country'] = 'ID';
 
 		if (isset($_POST['country'])) {
 			$country = $_POST['country'];
