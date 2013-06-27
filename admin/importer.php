@@ -7,11 +7,9 @@
 <div class="slide-block">
 <div class="module-block">
 <!-- start module content Admin-->
-<p>Dengan DB importer ini anda dapat mengimport seluruh data shipping (Provinsi & Kota) dari file <strong>daerah.db.php</strong> dan akan secara otomatis diimport ke dalam database WPE Indoshipping Pro ini.</p>
-
-<p>
-<strong>PERHATIAN :</strong><br />Setiap operasi Import tidak akan menghapus semua data shipping yang sudah ada di Database terlebih dahulu, namun hanya akan menambahkan data Provinsi yang belum ada di database. Untuk itu untuk melakukkan Import secara Full semua data, maka data shipping yang sekarang perlu dikosongkan terlebih dahulu melalui menu <strong>Indoshipping -> Manage -> Hapus semua data</strong>. Pastikan juga file daerah.db.php memiliki isi yang valid.</p>
-<p>Upload file <strong>daerah.db.php</strong> melalui uploader di bawah ini, dan click Import.</p>
+<p>Dengan DB importer ini anda dapat mengimport seluruh data shipping (Provinsi & Kota) dari file <strong>CSV</strong> dan akan secara otomatis diimport ke dalam database.</p><p>
+<strong>PERHATIAN :</strong><br />Setiap operasi Import tidak akan menghapus semua data shipping yang sudah ada di Database terlebih dahulu, namun hanya akan menambahkan data Provinsi yang belum ada di database. Untuk itu untuk melakukkan Import secara Full semua data, maka data shipping yang sekarang perlu dikosongkan terlebih dahulu melalui menu <strong>Indoshipping -> Manage -> Hapus semua data</strong>. Pastikan format daftar ongkos kirim di file CSV sesuai format yang telah ditentukan.</p>
+<p>Upload file <strong>CSV</strong> melalui uploader di bawah ini, dan click Import.</p>
 
 <?php
 global $upload_path,$upload_action;
