@@ -52,6 +52,8 @@ include $app_base_path.'admin/admin.php';
 
 /* Register plugin's Style and Scripts */
 function indosEnqueue() {
+    global $app_base_url;
+
 	if(! is_admin()){
 	    wp_register_style('indoshipping_css',$app_base_url.'assets/indoshipping.css');
 	    wp_register_script('indoshipping_js',$app_base_url.'assets/indoshipping.js',array('jquery'));
@@ -84,7 +86,7 @@ function wpei_load_province_html(){
             $html.='<option value="'.$prop->id.'">'.$prop->province_name.'</option>'."\n";
         }
 	}
-	$html.='</select>&nbsp;<select name="sel_kota" id="sel_kota" onchange="switchmethod(this.value, \'wpe_indoshipping\');"><option value="0">Kota</option></select></td>';
+	$html .='</select>&nbsp;<select name="sel_kota" id="sel_kota" onchange="switchmethod(this.value, \'wpe_indoshipping\');"><option value="0">Kota</option></select></td>';
     $html .='<td></td><td></td>';
     die ($html);
 }
